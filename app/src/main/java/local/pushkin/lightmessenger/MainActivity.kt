@@ -79,19 +79,16 @@ class MainActivity : AppCompatActivity() {
         isFlashOn = true
         val morseCodeThread = thread(start = true) {
             for (symbol in morseCodeMessage) {
-                when (symbol) {
-                    '.' -> {
+                when (enCodeMorse(symbol)) {
+                    "...." -> {
                         flashOn()
                         handler.postDelayed({ flashOff() }, dotDuration)
                         Thread.sleep(dotDuration + spaceBetweenSymbols)
                     }
-                    '-' -> {
+                    "---" -> {
                         flashOn()
                         handler.postDelayed({ flashOff() }, dashDuration)
                         Thread.sleep(dashDuration + spaceBetweenSymbols)
-                    }
-                    ' ' -> {
-                        Thread.sleep(spaceBetweenWords)
                     }
                 }
             }
@@ -101,5 +98,27 @@ class MainActivity : AppCompatActivity() {
 
     private fun stopMorseCode() {
         isFlashOn = false
+    }
+
+    private fun enCodeMorse(char: Char): String {
+        return when (char) {
+            's', 'S' -> "..."
+            'o', 'O' -> "---"
+            else -> "***"
+        }
+    }
+
+    private fun deCodeMorse(morseEncodedMessage: String) {
+        val message = StringBuilder()
+        val byTriplet = Regex("[.+]{3}")
+        val matches = byTriplet.findAll(morseEncodedMessage)
+
+        matches.forEach { triplet ->
+            when(triplet.toString()) {
+                "---" -> message.append("s")
+                "..." -> message.append("o")
+            }
+
+        }
     }
 }
