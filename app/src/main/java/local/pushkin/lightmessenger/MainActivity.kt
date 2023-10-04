@@ -19,7 +19,7 @@ import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
     private var isFlashOn = false
-    private var morseCodeMessage = "HELLO" // Change this to your Morse code message
+    private var morseCodeMessage = "SOS" // Change this to your Morse code message
     private val dotDuration = 100L // Duration of a dot in milliseconds
     private val dashDuration = dotDuration * 3 // Duration of a dash (3 dots)
     private val spaceBetweenSymbols = dotDuration // Space between dots and dashes
@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         cameraManager = getSystemService(Context.CAMERA_SERVICE) as CameraManager
-        cameraId = cameraManager.cameraIdList[0]
+        cameraId = cameraManager.cameraIdList[1]
 
         startButton.setOnClickListener(View.OnClickListener {
             if (isFlashOn) {
