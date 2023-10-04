@@ -108,17 +108,17 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun deCodeMorse(morseEncodedMessage: String) {
-        val message = StringBuilder()
+    private fun deCodeMorse(morseEncodedMessage: String): String {
+        val messageBuilder = StringBuilder()
         val byTriplet = Regex("[.+]{3}")
         val matches = byTriplet.findAll(morseEncodedMessage)
 
         matches.forEach { triplet ->
             when(triplet.toString()) {
-                "---" -> message.append("s")
-                "..." -> message.append("o")
+                "---" -> messageBuilder.append("s")
+                "..." -> messageBuilder.append("o")
             }
-
         }
+        return messageBuilder.toString()
     }
 }
